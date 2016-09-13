@@ -22,13 +22,13 @@ public class Main {
 	public static void test(){
 		
 		int antallFeil = 0;
-		//antallFeil += Oblig1Tester.oppgave1();
-		//antallFeil += Oblig1Tester.oppgave2();
-		//antallFeil += Oblig1Tester.oppgave3();
-		antallFeil += Oblig1Tester.oppgave4();
-		//antallFeil += Oblig1Tester.oppgave5();
-		//antallFeil += Oblig1Tester.oppgave6();
-		//antallFeil += Oblig1Tester.oppgave7();
+		antallFeil += Oblig1Tester.oppgave1();
+		antallFeil += Oblig1Tester.oppgave2();
+		antallFeil += Oblig1Tester.oppgave3();
+		//antallFeil += Oblig1Tester.oppgave4();
+		antallFeil += Oblig1Tester.oppgave5();
+		antallFeil += Oblig1Tester.oppgave6();
+		antallFeil += Oblig1Tester.oppgave7();
 		//antallFeil += Oblig1Tester.oppgave8();
 		
 		if (antallFeil == 0) {

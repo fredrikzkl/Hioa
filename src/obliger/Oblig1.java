@@ -114,17 +114,17 @@ public class Oblig1 {
 		if (a.length > 1) {
 			int next = 0;
 			int iterator = 0;
-			
+
 			boolean onlyOdd = true;
 			boolean onlyEven = true;
-			
+
 			int counter = 0;
 			while (iterator != a.length) {
 				if (a[iterator] % 2 != 0) {
 					bytt(a, iterator, next);
 					next++;
 					iterator = next;
-					onlyEven=false;
+					onlyEven = false;
 				} else {
 					iterator++;
 					onlyOdd = false;
@@ -132,13 +132,11 @@ public class Oblig1 {
 				counter++;
 
 			}
-			
-			
-			
-			
-			
-			if(!onlyEven)sortOdd(a, next);
-			if(!onlyOdd)sortEven(a, next);
+
+			if (!onlyEven)
+				sortOdd(a, next);
+			if (!onlyOdd)
+				sortEven(a, next);
 		}
 	}
 
@@ -173,12 +171,14 @@ public class Oblig1 {
 	 */
 
 	public static void rotasjon(char[] a) {
-		int temp = a[a.length - 1];
-		for (int i = a.length - 1; i > 0; i--) {
-			char swap = (char) a[i - 1];
-			a[i] = swap;
+		if (a.length > 0) {
+			int temp = a[a.length - 1];
+			for (int i = a.length - 1; i > 0; i--) {
+				char swap = (char) a[i - 1];
+				a[i] = swap;
+			}
+			a[0] = (char) temp;
 		}
-		a[0] = (char) temp;
 	}
 
 	/*
@@ -309,5 +309,11 @@ public class Oblig1 {
 
 		return index;
 	}
+	
+	/*
+	 * Oppgave 9
+	 */
+	
+	
 
 }
