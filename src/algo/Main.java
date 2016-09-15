@@ -9,27 +9,39 @@ import obliger.Oblig1Tester;
 public class Main {
 
 	public static void main(String[] args) {
-		 int[] a = {1,3,5};
-		  //Oblig1.delsortering(a);
-		  System.out.println(Arrays.toString(a));
-		  // Utskrift: [1, 3, 5, 7, 9, 2, 4, 6, 8, 10]
 		
+		int[] a = Oblig1Tester.randPerm(1000);
 		
-		
-		  test();
+		System.out.println(Oblig1.ombyttinger(a));
+		 
+		//test();
 	}
+	
+	public static void delsorteringNew(int[] a){
+		
+		
+		
+	}
+	
 
 	public static void test(){
 		
 		int antallFeil = 0;
+		
+		antallFeil += Oblig1Tester.oppgave4();
 		antallFeil += Oblig1Tester.oppgave1();
 		antallFeil += Oblig1Tester.oppgave2();
 		antallFeil += Oblig1Tester.oppgave3();
-		//antallFeil += Oblig1Tester.oppgave4();
 		antallFeil += Oblig1Tester.oppgave5();
 		antallFeil += Oblig1Tester.oppgave6();
 		antallFeil += Oblig1Tester.oppgave7();
-		//antallFeil += Oblig1Tester.oppgave8();
+		antallFeil += Oblig1Tester.oppgave8();
+		antallFeil += Oblig1Tester.oppgave9();
+		antallFeil += Oblig1Tester.oppgave10();
+/*		
+ */
+
+
 		
 		if (antallFeil == 0) {
 			System.out.println("Gratulerer!! Du passerte testen!");
