@@ -176,9 +176,6 @@ public class Oblig1 {
 	 
 	 public static void rotasjon(char[] a, int k){
 		 
-		 if(k>a.length){
-			 throw new IllegalArgumentException("K kan ikke være større");
-		 }
 		 
 		 if(a.length>0){
 			 if(k>=0){
