@@ -55,7 +55,7 @@ public class Tabeller {
 
 		return new int[] { maks, min };
 	}
-
+ 
 	/*
 	 * 5 2*N
 	 */
