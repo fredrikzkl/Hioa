@@ -278,6 +278,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 			i = i.neste;
 		}
 		fjern(0);
+		hode = hale = null;
 		antall = 0;
 		endringer++;
 	}
@@ -348,7 +349,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 		@Override
 		public T next(){
 			if(iteratorendringer != endringer) throw new ConcurrentModificationException();
-			if(hasNext() == false) throw new NoSuchElementException();
+			if(hasNext() == false || antall == 0) throw new NoSuchElementException();
 			fjernOK = true;
 			T value = denne.verdi;
 			denne = denne.neste;
@@ -357,7 +358,29 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 		@Override
 		public void remove() {
-			throw new UnsupportedOperationException("Ikke laget ennÃ¥!");
+            if (!fjernOK) throw new IllegalStateException("Må kalle på next først");
+			if(iteratorendringer != endringer) throw new ConcurrentModificationException();
+			
+			fjernOK = false;
+			
+			if(antall == 1){
+				hode = hale = null;
+			}else if (hode.neste == denne){
+				hode = denne;
+				hode.forrige = null;
+			}else if(denne == null){
+				hale = hale.forrige;
+				hale.neste = null;
+			}else{
+				Node<T> p = denne.forrige;
+				p.forrige.neste = p.neste;
+				p.neste.forrige = p.forrige;
+				p = null;
+			}
+			
+            antall--;
+            endringer++;
+            iteratorendringer++;
 		}
 
 	} // DobbeltLenketListeIterator
