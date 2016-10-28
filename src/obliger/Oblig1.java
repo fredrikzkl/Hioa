@@ -341,6 +341,7 @@ public class Oblig1 {
 		int[] temp = {a[0],a[1],a[2]};
 		int[] tempIndex = indekssortering(temp);
 		
+
 		for(int i = 3; i<n; i++){
 			if(a[i]<a[tempIndex[2]]){
 				
@@ -364,6 +365,7 @@ public class Oblig1 {
 		}
 		return tempIndex;
 	}
+
 	
 	/*
 	 * Oppgave 10
