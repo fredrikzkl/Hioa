@@ -12,23 +12,19 @@ import java.util.Random;
 public class oblig3tester {
 
 	public static void main(String[] args) {
-		Integer[] a = {4,7,2,9,4,10,8,7,4,6};
+		int[] a = {4, 2, 5, 1, 3};
 		  ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
 		  for (int verdi : a) tre.leggInn(verdi);
 
-		  System.out.println(tre.antall());      // Utskrift: 10
-		  System.out.println(tre.antall(5));     // Utskrift: 0
-		  System.out.println(tre.antall(4));     // Utskrift: 3
-		  System.out.println(tre.antall(7));     // Utskrift: 2
-		  System.out.println(tre.antall(10));    // Utskrift: 1
-		  
+		  System.out.println(tre.omvendtString());  // [10, 9, 8, 7, 7, 6, 4, 4, 4, 2, 1]
+		 
 		  int antallFeil = 0;
 
 // 	    antallFeil += oppgave1();
 //	    antallFeil += oppgave2();
 //	    antallFeil += oppgave3();
 //	    antallFeil += oppgave4();
-//	    antallFeil += oppgave5();
+	    antallFeil += oppgave5();
 //	    antallFeil += oppgave6();
 //	    antallFeil += oppgave7();
 //	    antallFeil += oppgave8();

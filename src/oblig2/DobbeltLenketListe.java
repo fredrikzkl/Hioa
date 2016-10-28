@@ -17,9 +17,9 @@ import javax.activity.InvalidActivityException;
 
 
 /*
- * Fredrik Zander Kloster
- * Oblig 2
- * StudentNr: 
+ *	Oblig 2, Algoritmer og Datastrukturer
+ *	Fredrik Zander Kloster
+ *	Studnr: s188078
  */
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -309,9 +309,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 		return s.toString();
 
 	}
-
+	
+	//Hentet inspirasjon fra 'innsetningssortering' som ligger i delkapittel 1.4.6
 	public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-		throw new UnsupportedOperationException("Ikke laget ennå!");
+		  for (int x = 1; x < liste.antall(); x++){
+	            T verdi = liste.hent(x);
+	            int y = x - 1;
+	            for ( ; y >= 0 && c.compare(verdi,liste.hent(y)) < 0; y --){
+	                liste.oppdater(y+1,liste.hent(y));
+	            }
+	            liste.oppdater(y+1,verdi);
+	        }
 	}
 
 	@Override
