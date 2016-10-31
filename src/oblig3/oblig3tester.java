@@ -16,9 +16,9 @@ public class oblig3tester {
 		char[] verdier = "IATBHJCRSOFELKGDMPQN".toCharArray();
 		for (char c : verdier)
 			tre.leggInn(c);
+		String[] s = tre.grener();
 
-		System.out.println(tre.høyreGren() + " " );
-
+		  for (String gren : s) System.out.println(gren);
 		// Utskrift: [I, T, J, R, S] [I, A, B, H, C, F, E, D]
 
 		int antallFeil = 0;
@@ -28,8 +28,8 @@ public class oblig3tester {
 		// antallFeil += oppgave3();
 		// antallFeil += oppgave4();
 		// antallFeil += oppgave5();
-		antallFeil += oppgave6();
-		// antallFeil += oppgave7();
+		 //antallFeil += oppgave6();
+		 //antallFeil += oppgave7();
 		// antallFeil += oppgave8();
 		// antallFeil += oppgave9();
 		// antallFeil += oppgave10();
