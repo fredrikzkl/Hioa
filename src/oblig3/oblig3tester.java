@@ -16,10 +16,11 @@ public class oblig3tester {
 		char[] verdier = "IATBHJCRSOFELKGDMPQN".toCharArray();
 		for (char c : verdier)
 			tre.leggInn(c);
-		String[] s = tre.grener();
-
-		  for (String gren : s) System.out.println(gren);
-		// Utskrift: [I, T, J, R, S] [I, A, B, H, C, F, E, D]
+		
+		
+		// En for-alle-løkke bruker iteratoren implisitt
+		  for (Character c : tre) System.out.print(c + " ");  // D G K N Q S
+		 // [D, E, G, F, C, H, B, A, K, N, M, L, Q, P, O, S, R, J, T, I]
 
 		int antallFeil = 0;
 
@@ -30,7 +31,7 @@ public class oblig3tester {
 		// antallFeil += oppgave5();
 		 //antallFeil += oppgave6();
 		 //antallFeil += oppgave7();
-		// antallFeil += oppgave8();
+		 //antallFeil += oppgave8();
 		// antallFeil += oppgave9();
 		// antallFeil += oppgave10();
 

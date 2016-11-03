@@ -2,6 +2,8 @@ package oblig3;
 
 import java.util.*;
 
+
+
 public class ObligSBinTre<T> implements Beholder<T> {
 	private static final class Node<T> // en indre nodeklasse
 	{
@@ -386,15 +388,35 @@ public class ObligSBinTre<T> implements Beholder<T> {
 
 	public String postString() {
 		StringJoiner s = new StringJoiner(", ", "[", "]");
-		
 		if (tom()) return s.toString();
-
-		Stack<Node<T>> stakk = new Stack<Node<T>>();
-		stakk.push(rot);
+		Node<T> node =  finnPostNode(rot); //Finner første postorden Node
 		
-		
-		
+		while(true){
+			s.add(node.toString());
+			if(node.forelder == null)break;
+			if(node.forelder.høyre == null || node.forelder.høyre == node){
+				node = node.forelder;
+			}else{
+				node = node.forelder.høyre;
+				node = finnPostNode(node);
+			}
+			
+		}
 		return s.toString();
+	}
+	
+	private Node<T> finnPostNode(Node<T> node){
+		while(true){
+			if(node.venstre != null){
+				node = node.venstre;
+				continue;
+			}else if(node.høyre != null){
+				node = node.høyre;
+				continue;
+			}
+			break;
+		}
+		return node;
 	}
 	
 
@@ -411,8 +433,12 @@ public class ObligSBinTre<T> implements Beholder<T> {
 
 		private BladnodeIterator() // konstruktør
 		{
-			throw new UnsupportedOperationException("Ikke kodet ennå!");
+			if(!hasNext()) return;
+			p = finnPostNode(rot);
+			q = rot;
 		}
+		
+		
 
 		@Override
 		public boolean hasNext() {
@@ -421,7 +447,18 @@ public class ObligSBinTre<T> implements Beholder<T> {
 
 		@Override
 		public T next() {
-			throw new UnsupportedOperationException("Ikke kodet ennå!");
+			Node<T> node = p;
+			while(true){
+				if(node.forelder == null) throw new NoSuchElementException();
+				if(node.forelder.høyre == null || node.forelder.høyre == node){
+					node = node.forelder;
+					continue;
+				}else{
+					node = node.forelder.høyre;
+					p = finnPostNode(node);
+					return p.verdi;
+				}
+			}
 		}
 
 		@Override
