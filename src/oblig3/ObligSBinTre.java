@@ -2,7 +2,11 @@ package oblig3;
 
 import java.util.*;
 
-
+/*
+ * Fredrik Zander Kloster
+ * Oblig 3
+ * Studentnr: s188078
+ */
 
 public class ObligSBinTre<T> implements Beholder<T> {
 	private static final class Node<T> // en indre nodeklasse
@@ -47,6 +51,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
 	@Override
 	public boolean leggInn(T verdi) {
 		Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
+		
 
 		Node<T> p = rot, q = null; // p starter i roten
 		int cmp = 0; // hjelpevariabel
@@ -69,7 +74,9 @@ public class ObligSBinTre<T> implements Beholder<T> {
 		else
 			q.høyre = p; // høyre barn til q
 
+		
 		antall++; // én verdi mer i treet
+		endringer++;
 		return true;
 	}
 
@@ -95,6 +102,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
 
 	@Override
 	public boolean fjern(T verdi) {
+		
 		if (verdi == null)
 			return false; // treet har ingen nullverdier
 
@@ -156,6 +164,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
 		}
 
 		antall--; // det er nå én node mindre i treet
+		endringer++;
 		return true;
 	}
 
@@ -197,6 +206,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
 		while (rot != null) {
 			fjern(rot.verdi);
 		}
+	
 	}
 
 	private static <T> Node<T> nesteInorden(Node<T> p) {
@@ -436,6 +446,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
 			if(!hasNext()) return;
 			p = finnPostNode(rot);
 			q = rot;
+			
 		}
 		
 		
@@ -447,23 +458,47 @@ public class ObligSBinTre<T> implements Beholder<T> {
 
 		@Override
 		public T next() {
-			Node<T> node = p;
+			if(!hasNext()) throw new NoSuchElementException();
+			if (endringer != iteratorendringer) throw new ConcurrentModificationException();
+            removeOK = true;
+			q = p;
+			p = finnPostNode(p);
 			while(true){
-				if(node.forelder == null) throw new NoSuchElementException();
-				if(node.forelder.høyre == null || node.forelder.høyre == node){
-					node = node.forelder;
+				if(p.forelder == null){
+					p = null;
+					return q.verdi;
+				}
+				if(p.forelder.høyre == null || p.forelder.høyre == p){
+					p = p.forelder;
 					continue;
 				}else{
-					node = node.forelder.høyre;
-					p = finnPostNode(node);
-					return p.verdi;
+					p = p.forelder.høyre;
+					p = finnPostNode(p);
+					return q.verdi;
 				}
 			}
 		}
+		
 
 		@Override
 		public void remove() {
-			throw new UnsupportedOperationException("Ikke kodet ennå!");
+			if(tom()) throw new IllegalStateException("Treet er tom");
+			if(!removeOK) throw new IllegalStateException("Kan ikke remove før pekeren er endret");
+			if(iteratorendringer != endringer) throw new ConcurrentModificationException();
+			
+			if(q.forelder == null){
+				q.venstre = null;
+				q.høyre = null;
+			}else if(q.forelder.venstre == q){
+				q.forelder.venstre = null;
+			}else{
+				q.forelder.høyre = null;
+			}
+			
+			endringer++;
+			iteratorendringer++;
+			antall--;
+			removeOK = false;
 		}
 
 	} // BladnodeIterator
